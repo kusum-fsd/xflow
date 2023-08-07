@@ -20,47 +20,48 @@
         </section>
 
         {{-- <h5 class="mb-2 ">Info Box</h5> --}}
-        <div class="row mt-4">
-            <div class="col-md-3 col-sm-6 col-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+        <div class="container">
+            <div class="row mt-4">
+                <div class="col-md-4 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="nav-icon fas fa-globe"></i></span>
 
-                    <div class="info-box-content">
-                        <span class="info-box-text">Messages</span>
-                        <span class="info-box-number">1,410</span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Country</span>
+                            <span class="info-box-number">3</span>
+                        </div>
+                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box-content -->
+                    <!-- /.info-box -->
                 </div>
-                <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
+                <!-- /.col -->
+                <div class="col-md-4 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success"> <i class="nav-icon fas fa-code-branch"></i></span>
 
-                    <div class="info-box-content">
-                        <span class="info-box-text">Bookmarks</span>
-                        <span class="info-box-number">410</span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Branch</span>
+                            <span class="info-box-number">3</span>
+                        </div>
+                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box-content -->
+                    <!-- /.info-box -->
                 </div>
-                <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
+                <!-- /.col -->
+                <div class="col-md-4 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-warning"><i class="far fa-user"></i></span>
 
-                    <div class="info-box-content">
-                        <span class="info-box-text">Uploads</span>
-                        <span class="info-box-number">13,648</span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">User</span>
+                            <span class="info-box-number">2</span>
+                        </div>
+                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box-content -->
+                    <!-- /.info-box -->
                 </div>
-                <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-12">
+                <!-- /.col -->
+                {{-- <div class="col-md-4 col-sm-6 col-12">
                 <div class="info-box">
                     <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
 
@@ -68,11 +69,12 @@
                         <span class="info-box-text">Likes</span>
                         <span class="info-box-number">93,139</span>
                     </div>
-                    <!-- /.info-box-content -->
+                    
                 </div>
-                <!-- /.info-box -->
+               
+            </div> --}}
+                <!-- /.col -->
             </div>
-            <!-- /.col -->
         </div>
         <!-- /.row -->
 

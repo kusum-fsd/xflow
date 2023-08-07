@@ -13,4 +13,9 @@ class Country extends Model
     {
         return $this->hasMany(Branch::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_country');
+    }
 }

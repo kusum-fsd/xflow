@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+// namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Branch;
+use App\Models\Country;
 use Spatie\Permission\Models\Role;
-use Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
 
 class UserController extends Controller
@@ -19,7 +23,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = User::orderBy('id', 'DESC')->get();
-        return view('users.index', compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -30,7 +34,12 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name', 'name')->all();
-        return view('users.create', compact('roles'));
+        // Retrieve or create the $branches variable
+        $branches = Branch::all();
+        // return view('admin.users.create', compact('roles', 'branches'));
+        $countries = Country::pluck('title', 'id')->all(); // Assuming you have 'name' and 'id' columns in the 'countries' table
+
+        return view('admin.users.create', compact('roles', 'branches', 'countries'));
     }
 
     /**
@@ -42,8 +51,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
+            'branch_id' => 'required|exists:branches,id',
+            'country_id' => 'required|exists|countries,id',
+            'mobile' => 'required|string|max:10', // Adjust the max length if needed
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
@@ -54,8 +66,7 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')
-            ->with('success', 'User created successfully');
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully');
     }
 
     /**
@@ -67,7 +78,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('users.show', compact('user'));
+        return view('admin.users.show', compact('user'));
     }
 
     /**
@@ -82,7 +93,7 @@ class UserController extends Controller
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('users.edit', compact('user', 'roles', 'userRole'));
+        return view('admin.users.edit', compact('user', 'roles', 'userRole'));
     }
 
     /**
@@ -114,8 +125,7 @@ class UserController extends Controller
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')
-            ->with('success', 'User updated successfully');
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully');
     }
 
     /**
@@ -127,7 +137,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('users.index')
-            ->with('success', 'User deleted successfully');
+        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully');
     }
 }

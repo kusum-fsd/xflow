@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'mobile', // Add other fields as needed
+        'branch_id', // If you have a branch_id foreign key
+        // Add other fillable fields as needed
     ];
 
     /**
@@ -41,4 +44,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function countries()
+    {
+        return $this->belongsToMany(Country::class, 'user_country');
+    }
 }

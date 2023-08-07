@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Employee</h1>
+                        <h1>User</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Employee</li>
+                            <li class="breadcrumb-item active">Users</li>
                         </ol>
                     </div>
                 </div>
@@ -23,9 +23,9 @@
             <div class="card-body">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Employee Table</h3>
+                        <h3 class="card-title">User Table</h3>
                         <div class="text-right">
-                            <a href="{{ route('admin.employees.create') }}" class="btn btn-warning btn-sm">Add Employee</a>
+                            <a href="{{ route('admin.users.create') }}" class="btn btn-warning btn-sm">Add User</a>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -43,28 +43,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($branches as $branches)
+                                @foreach ($users as $user)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $employees->name }}</td>
-                                        <td>{{ $employees->mobile }}</td>
-                                        <td>{{ $employees->email }}</td>
-                                        <td>{{ $employees->mobile }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->mobile }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ optional($user->branch)->name }}</td>
+                                        <td>{{ optional($user->country)->title }}</td>
                                         <td>
-                                            <a href="{{ route('admin.employees.edit', $employees->id) }}"
+                                            <a href="{{ route('admin.users.edit', $user->id) }}"
                                                 class="btn btn-primary btn-sm">Edit</a>
                                             <form method="post" class="d-inline"
-                                                action="{{ route('admin.employees.destroy', $employees->id) }}">
+                                                action="{{ route('admin.users.destroy', $user->id) }}">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                             </form>
                                         </td>
-
                                     </tr>
                                 @endforeach
-
                             </tbody>
+
 
                         </table>
                     </div>
