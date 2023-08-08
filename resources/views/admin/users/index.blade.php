@@ -47,10 +47,18 @@
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $user->name }}</td>
-                                        <td>{{ $user->mobile }}</td>
+                                        <td>{{ $user->mobile_no }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ optional($user->branch)->name }}</td>
-                                        <td>{{ optional($user->country)->title }}</td>
+                                        <td>
+                                            @if ($user->branches)
+                                                {{ $user->branches->name }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @foreach ($user->countries as $country)
+                                                {{ $country->title }}
+                                            @endforeach
+                                        </td>
                                         <td>
                                             <a href="{{ route('admin.users.edit', $user->id) }}"
                                                 class="btn btn-primary btn-sm">Edit</a>
@@ -58,7 +66,8 @@
                                                 action="{{ route('admin.users.destroy', $user->id) }}">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm show_confirm"
+                                                    data-toggle="tooltip">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -75,4 +84,26 @@
 
 
     </div>
+@endsection
+
+@section('delete_pop')
+    <script>
+        $('.show_confirm').click(function(event) {
+          var form =  $(this).closest("form");
+          var name = $(this).data("name");
+          event.preventDefault();
+          swal({
+              title: `Are you sure you want to delete this record?`,
+              text: "If you delete this, it will be gone forever.",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            }
+          });
+      });
+    </script>
 @endsection

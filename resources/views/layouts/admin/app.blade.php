@@ -30,6 +30,9 @@
 
     @include('layouts.admin.js')
 
+    @yield('javascript')
+    @yield('delete_pop')
+
 </body>
 
 </html>

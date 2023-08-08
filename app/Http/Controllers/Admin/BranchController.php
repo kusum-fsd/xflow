@@ -71,7 +71,6 @@ class BranchController extends Controller
         $branches = Branch::find($id); // Fetch the branch data by its ID
         $countries = Country::all(); // Fetch all countries from the database
         return view('admin.branches.edit', compact('branches', 'countries'));
-  
     }
     /**
      * Update the specified resource in storage.
@@ -107,5 +106,14 @@ class BranchController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getBranches(Request $request)
+    {
+
+        $countryId = $request->input('country_id');
+        $branches = Branch::where('country_id', $countryId)->get();
+
+        return response()->json(['branches' => $branches]);
     }
 }

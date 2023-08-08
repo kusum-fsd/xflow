@@ -22,7 +22,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::orderBy('id', 'DESC')->get();
+        $users = User::whereNotIn('email', ['superadmin@gmail.com'])->orderBy('id', 'DESC')->get();
+
         return view('admin.users.index', compact('users'));
     }
 
@@ -33,13 +34,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name', 'name')->all();
-        // Retrieve or create the $branches variable
-        $branches = Branch::all();
-        // return view('admin.users.create', compact('roles', 'branches'));
-        $countries = Country::pluck('title', 'id')->all(); // Assuming you have 'name' and 'id' columns in the 'countries' table
-
-        return view('admin.users.create', compact('roles', 'branches', 'countries'));
+        $roles = Role::whereNotIn('name', ['SuperAdmin'])->get();
+        $countries = Country::all();
+        return view('admin.users.create', compact('roles', 'countries'));
     }
 
     /**
@@ -53,10 +50,10 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'branch_id' => 'required|exists:branches,id',
-            'country_id' => 'required|exists|countries,id',
-            'mobile' => 'required|string|max:10', // Adjust the max length if needed
-            'password' => 'required|same:confirm-password',
+            'branch_id' => 'nullable',
+            'country_id' => 'nullable',
+            'mobile_no' => 'nullable|string|max:10',
+            'password' => 'required|same:confirm_password',
             'roles' => 'required'
         ]);
 
@@ -64,9 +61,18 @@ class UserController extends Controller
         $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
-        $user->assignRole($request->input('roles'));
 
-        return redirect()->route('admin.users.index')->with('success', 'User created successfully');
+
+        // Country::create(['user_id' => $user->id, 'country_id' => $request->country_id]);
+
+        $user->countries()->sync($request->input('country_id'));
+
+        $user->syncRoles($request->input('roles'));
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'User created successfully');
+        }
+        return redirect()->back()->with('success', 'User created successfully');
     }
 
     /**
@@ -90,10 +96,11 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roles = Role::pluck('name', 'name')->all();
-        $userRole = $user->roles->pluck('name', 'name')->all();
+        $roles = Role::all();
+        $countries = Country::all();
+        $userRole = $user->roles->all();
 
-        return view('admin.users.edit', compact('user', 'roles', 'userRole'));
+        return view('admin.users.edit', compact('user', 'roles', 'userRole', 'countries'));
     }
 
     /**
@@ -103,29 +110,31 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'same:confirm-password',
+            'name' => 'required|string|max:255',
+            'mobile_no' => 'nullable|string|max:10',
+            // 'email' => 'required|email|unique:users,email',
+            'branch_id' => 'nullable',
+            'country_id' => 'nullable',
+            // 'password' => 'required|same:confirm_password',
             'roles' => 'required'
         ]);
 
         $input = $request->all();
-        if (!empty($input['password'])) {
-            $input['password'] = Hash::make($input['password']);
-        } else {
-            $input = Arr::except($input, array('password'));
-        }
+        // $input['password'] = Hash::make($input['password']);
 
-        $user = User::find($id);
         $user->update($input);
-        DB::table('model_has_roles')->where('model_id', $id)->delete();
 
-        $user->assignRole($request->input('roles'));
+        $user->countries()->sync($request->input('country_id'));
 
-        return redirect()->route('admin.users.index')->with('success', 'User updated successfully');
+        $user->syncRoles($request->input('roles'));
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'User updated successfully');
+        }
+        return redirect()->back()->with('success', 'User updated successfully');
     }
 
     /**
