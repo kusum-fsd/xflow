@@ -28,6 +28,8 @@ Route::group(
         Route::resource('countries', 'CountryController');
         Route::resource('branches', 'BranchController');
         Route::resource('users', 'UserController');
+        Route::resource('payments', 'PaymentController');
+
         Route::post('/get-branches', 'BranchController@getBranches');
 
         // Route::resource('employees', EmployeeController::class);

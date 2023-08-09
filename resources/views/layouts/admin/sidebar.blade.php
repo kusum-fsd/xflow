@@ -59,6 +59,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.payments.index') }}" class="nav-link">
+                        <i class="nav-icon far fa-dollar"></i>
+                        <p>
+                            Payments
+                        </p>
+                    </a>
+                </li>
 
                 {{-- <li class="nav-item">
                     <a href="#" class="nav-link">
