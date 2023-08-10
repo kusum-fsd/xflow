@@ -45,7 +45,11 @@ class BranchController extends Controller
             // other validation rules
         ]);
         $branches = Branch::create($request->all());
-        return redirect()->route('admin.branches.index')->withSuccess('Branch created successfully!!!!!');
+        // return redirect()->route('admin.branches.index')->withSuccess('Branch created successfully!!!!!');
+        if (!$branches) {
+            return redirect()->back()->with('error', 'Error While Creating Branch');
+        }
+        return redirect()->back()->with('success', 'Branch created successfully');
     }
 
     /**

@@ -22,6 +22,31 @@
                 Admin <i class="fas fa-user"></i>
             </a>
         </li>
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="far fa-user"></i>
+
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <a href="{{ route('logout') }}" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                Logout
+                                <span class="float-right text-sm text-danger"><i class="fas fa-lock"></i></span>
+                            </h3>
+
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+
+
+            </div>
+        </li>
     </ul>
 </nav>
 <!-- /.navbar -->

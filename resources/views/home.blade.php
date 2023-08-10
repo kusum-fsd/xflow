@@ -28,7 +28,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Country</span>
-                            <span class="info-box-number">3</span>
+                            <span class="info-box-number">{{ $country }}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -41,7 +41,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Branch</span>
-                            <span class="info-box-number">3</span>
+                            <span class="info-box-number">{{ $branch }}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -54,7 +54,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">User</span>
-                            <span class="info-box-number">2</span>
+                            <span class="info-box-number">{{ $user }}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>

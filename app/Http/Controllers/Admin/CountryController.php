@@ -35,8 +35,11 @@ class CountryController extends Controller
             // other validation rules
         ]);
         $countries = Country::create($request->all());
-        return redirect()->route('admin.countries.index')->withSuccess('Country created successfully!!!!!');
-
+        // return redirect()->route('admin.countries.index')->withSuccess('Country created successfully!!!!!');
+        if (!$countries) {
+            return redirect()->back()->with('error', 'Error While Creating Country');
+        }
+        return redirect()->back()->with('success', 'Country created successfully');
     }
 
     public function show(Country $countries)

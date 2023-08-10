@@ -23,3 +23,36 @@
 <link rel="stylesheet" href="{{ asset('admin/plugins/daterangepicker/daterangepicker.css') }}">
 <!-- summernote -->
 <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.min.css') }}">
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ asset('admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+<style>
+    .transaction-form {
+        display: none;
+    }
+
+    .show-deposit-form #deposit-form,
+    .show-withdraw-form #withdraw-form {
+        display: block;
+    }
+
+    table thead {
+        color: #fff !important;
+        background-color: #17a2b8 !important;
+
+    }
+
+    table tbody tr:nth-child(even) {
+        background: #f5f2f2
+    }
+
+    table tbody tr:nth-child(odd) {
+        background: #FFF
+    }
+
+    .btn {
+        border-radius: 30px;
+        box-shadow: 4px 2px 4px 0px rgb(0, 0, 0, .2);
+    }
+</style>

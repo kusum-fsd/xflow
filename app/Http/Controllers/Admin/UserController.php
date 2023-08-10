@@ -148,4 +148,11 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect()->route('admin.users.index')->with('success', 'User deleted successfully');
     }
+
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->route('Login')->with('success', 'Your have been successfully logout');
+    }
 }

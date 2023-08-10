@@ -29,6 +29,7 @@ Route::group(
         Route::resource('branches', 'BranchController');
         Route::resource('users', 'UserController');
         Route::resource('payments', 'PaymentController');
+        Route::resource('customers', 'CustomerController');
 
         Route::post('/get-branches', 'BranchController@getBranches');
 
@@ -36,3 +37,4 @@ Route::group(
     }
 );
 Auth::routes();
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
