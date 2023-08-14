@@ -2,11 +2,20 @@
 
 @section('content')
     <div class="row justify-content-center d-flex">
-        @if ($message = Session::get('success'))
-            <div class="alert alert-success alert-block">
-                <strong>{{ $message }}</strong>
-            </div>
-        @endif
+        <div class="col-lg-10">
+            @if ($message = Session::get('success'))
+                <div id="success-alert" class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+
+                <script>
+                    setTimeout(function() {
+                        $('#success-alert').fadeOut('slow');
+                    }, 4000); // 4 seconds in milliseconds
+                </script>
+            @endif
+        </div>
         <div class="col-lg-8 ">
             <div class="card-body">
                 <div class="card card-primary">

@@ -32,7 +32,7 @@
 
     @yield('javascript')
     @yield('delete_pop')
-    @yield('form_switch')
+    {{-- @yield('form_switch') --}}
 
 </body>
 

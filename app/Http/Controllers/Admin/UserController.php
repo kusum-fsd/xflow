@@ -148,11 +148,16 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect()->route('admin.users.index')->with('success', 'User deleted successfully');
     }
-
-
-    public function logout()
+    public function customers()
     {
-        auth()->logout();
-        return redirect()->route('Login')->with('success', 'Your have been successfully logout');
+        $user = auth()->user();
+        $customers = $user->customers;
+
+        return view('users.customers.index', compact('customers'));
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
     }
 }

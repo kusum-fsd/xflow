@@ -38,4 +38,10 @@ class HomeController extends Controller
     {
         return view('level');
     }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->route('home')->with('success', 'Your have been successfully logout');
+    }
 }

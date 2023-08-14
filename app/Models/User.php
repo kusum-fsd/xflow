@@ -52,4 +52,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Branch::class, 'branch_id');
     }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

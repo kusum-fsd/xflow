@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CountryController extends Controller
 {
@@ -29,13 +30,18 @@ class CountryController extends Controller
     public function store(Request $request)
     {
         //validation
-        $request->validate([
+        $validate = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
-
-            // other validation rules
         ]);
+
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate)->withInput();
+        }
+
+
         $countries = Country::create($request->all());
         // return redirect()->route('admin.countries.index')->withSuccess('Country created successfully!!!!!');
+
         if (!$countries) {
             return redirect()->back()->with('error', 'Error While Creating Country');
         }

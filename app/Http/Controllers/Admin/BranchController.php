@@ -44,6 +44,7 @@ class BranchController extends Controller
             'country_id' => 'required|string|max:255',
             // other validation rules
         ]);
+
         $branches = Branch::create($request->all());
         // return redirect()->route('admin.branches.index')->withSuccess('Branch created successfully!!!!!');
         if (!$branches) {

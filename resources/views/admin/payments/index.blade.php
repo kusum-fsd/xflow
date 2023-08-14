@@ -36,10 +36,10 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <h3 class="card-title">
-                                                <button id="show-deposit-button" class="btn btn-outline-info"
-                                                    onclick="showForm('deposit')">Deposit</button>
-                                                <button id="show-withdraw-button" class="btn btn-outline-primary"
-                                                    onclick="showForm('withdraw')">Withdraw</button>
+                                                <a href="{{ route('admin.payments.show', '1') }}" id="show-deposit-button"
+                                                    class="btn btn-outline-info">Deposit</a>
+                                                <a href="{{ route('admin.payments.show', '2') }}" id="show-withdraw-button"
+                                                    class="btn btn-outline-primary">Withdraw</a>
                                             </h3>
                                         </div>
                                         <!-- /.card-header -->
@@ -56,9 +56,38 @@
                                                         <th>Remark</th>
                                                         <th>DEP Type</th>
                                                         <th>Status</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+
+                                                    @foreach ($payments as $payments)
+                                                        <tr>
+                                                            dd[]
+                                                            <td>{{ $loop->index + 1 }}</td>
+                                                            <td>{{ $payments->customer->name }}</td>
+                                                            <td>{{ $payments->mtn_no }}</td>
+                                                            <td>{{ $payments->USD_amt }}</td>
+                                                            <td>{{ $payments->INR_amt }}</td>
+                                                            <td>{{ $payments->user_id }}</td>
+                                                            <td>{{ $payments->deposite_type }}</td>
+                                                            <td>{{ $payments->remark }}</td>
+                                                            <td>{{ $payments->stauts }}</td>
+                                                            <td>
+                                                                <a href="{{ route('admin.payments.edit', $branches->id) }}"
+                                                                    class="btn btn-primary btn-sm">Edit</a>
+                                                                <form method="post" class="d-inline"
+                                                                    action="{{ route('admin.payments.destroy', $branches->id) }}">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger btn-sm show_confirm"
+                                                                        data-toggle="tooltip">Delete</button>
+                                                                </form>
+                                                            </td>
+
+                                                        </tr>
+                                                    @endforeach
 
                                                 </tbody>
                                             </table>

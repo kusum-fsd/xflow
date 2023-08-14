@@ -8,16 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'mtn_no',
+        'USD_amt',
+        'INR_amt',
+        'remark',
+        'deposit_type',
+        'customer_id',
+        'user_id',
+    ];
+    protected $hidden = ['transaction_no'];
     public function customer()
     {
         return $this->belongsTo(Customer::class);
     }
-    public function customers()
+
+
+    public function user()
     {
-        return $this->belongsToMany(Customer::class, 'customer_payment');
+        return $this->belongsTo(User::class);
     }
-    public function create($type)
-{
-    return view('admin.payments.create', compact('type'));
-}
 }

@@ -1,12 +1,21 @@
 @extends('layouts.admin.app')
 @section('content')
     <div class="row justify-content-center d-flex">
-        @if ($message = Session::get('success'))
-            <div class="alert alert-success alert-block">
+        <div class="col-lg-10">
+            @if ($message = Session::get('success'))
+                <div id="success-alert" class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>{{ $message }}</strong>
+                </div>
 
-                <strong>{{ $message }}</strong>
-            </div>
-        @endif
+                <script>
+                    setTimeout(function() {
+                        $('#success-alert').fadeOut('slow');
+                    }, 4000); // 4 seconds in milliseconds
+                </script>
+            @endif
+        </div>
+
         <div class="col-lg-8">
             <div class="card-body">
                 <div class="card card-primary">
@@ -27,11 +36,8 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         <label>Title</label>
-                                        <input type="text"
-                                            class="form-control @error('title')
-                                    is-invalid
-              @enderror"
-                                            name="title" placeholder="Enter Title" value="{{ old('title') }}">
+                                        <input type="text" class="form-control " name="title" placeholder="Enter Title"
+                                            value="{{ old('title') }}">
                                         @error('title')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

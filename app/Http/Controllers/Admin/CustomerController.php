@@ -121,4 +121,8 @@ class CustomerController extends Controller
         Customer::find($id)->delete();
         return redirect()->route('admin.customers.index')->with('success', 'Customer deleted successfully');
     }
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

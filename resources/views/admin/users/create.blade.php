@@ -5,16 +5,20 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <div class="row justify-content-center d-flex">
-        @if ($message = Session::get('success'))
-            <div class="alert alert-success alert-block">
-                <strong>{{ $message }}</strong>
-            </div>
-        @endif
-        @if ($message = Session::get('error'))
-            <div class="alert alert-success alert-block">
-                <strong>{{ $message }}</strong>
-            </div>
-        @endif
+        <div class="col-lg-10">
+            @if ($message = Session::get('success'))
+                <div id="success-alert" class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+
+                <script>
+                    setTimeout(function() {
+                        $('#success-alert').fadeOut('slow');
+                    }, 4000); // 4 seconds in milliseconds
+                </script>
+            @endif
+        </div>
         <div class="col-lg-10 ">
             <div class="card-body">
                 <div class="card card-primary">
@@ -69,8 +73,7 @@
                                     <div class="form-group">
                                         <label> Password</label>
                                         <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                            name="password" placeholder="" value="{{ old('password') }}"
-                                            autocomplete="Any">
+                                            name="password" placeholder="" value="{{ old('password') }}" autocomplete="Any">
                                         @error('password')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

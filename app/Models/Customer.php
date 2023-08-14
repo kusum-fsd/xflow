@@ -20,4 +20,12 @@ class Customer extends Model
         return $this->hasMany(Payment::class);
         return $this->belongsToMany(Payment::class, 'customer_payment');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    
+
+    
 }
