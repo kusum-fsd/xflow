@@ -7,7 +7,7 @@
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
 <!-- Ionicons -->
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+{{-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> --}}
 <!-- Tempusdominus Bootstrap 4 -->
 <link rel="stylesheet"
     href="{{ asset('admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
@@ -55,5 +55,13 @@
     .btn {
         border-radius: 30px;
         box-shadow: 4px 2px 4px 0px rgb(0, 0, 0, .2);
+    }
+
+    .nav-sidebar .nav-item>.nav-link {
+        border: 1px solid #0661ab;
+        margin-bottom: 7px;
+        border-radius: 13px;
+        box-shadow: 3px 3px 2px 1px #000000;
+
     }
 </style>

@@ -16,8 +16,10 @@ class Payment extends Model
         'deposit_type',
         'customer_id',
         'user_id',
+        'transaction_no',
+        'status'
     ];
-    protected $hidden = ['transaction_no'];
+    protected $hidden = [];
     public function customer()
     {
         return $this->belongsTo(Customer::class);

@@ -17,7 +17,8 @@
                     </div>
                 </div>
 
-                <form action="{{ route('admin.customers.update', $customers->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.customers.update', $customers->id) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('put')
 
@@ -27,7 +28,8 @@
                                 <div class="form-group">
                                     <label>Name</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        name="name" placeholder="Enter  Name" value="{{ old('name') }}">
+                                        name="name" placeholder="Enter  Name"
+                                        value="{{ old('name', $customers->name) }}">
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -40,7 +42,8 @@
                                     <input class="form-control  @error('mobile_no') is-invalid @enderror" min="10"
                                         maxlength="10" size="10" type="text" id="mobile_no" name="mobile_no"
                                         oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
-                                        placeholder="Enter Mobile No." value="{{ old('mobile_no') }}">
+                                        placeholder="Enter Mobile No."
+                                        value="{{ old('mobile_no', $customers->mobile_no) }}">
                                     @error('mobile_no')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -51,7 +54,8 @@
                                 <div class="form-group">
                                     <label>Email</label>
                                     <input class="form-control @error('email') is-invalid @enderror" type="email"
-                                        name="email" placeholder="Enter email" value="{{ old('email') }}">
+                                        name="email" placeholder="Enter email"
+                                        value="{{ old('email', $customers->email) }}">
                                     @error('email')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -62,7 +66,8 @@
                                 <div class="form-group">
                                     <label>Added By</label>
                                     <input class="form-control @error('added_by') is-invalid @enderror" type="text"
-                                        name="added_by" placeholder="Added by" value="{{ old('added_by') }}">
+                                        name="added_by" placeholder="Added by"
+                                        value="{{ old('added_by', $customers->added_by) }}">
                                     @error('added_by')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

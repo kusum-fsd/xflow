@@ -61,18 +61,36 @@
                     <!-- /.info-box -->
                 </div>
                 <!-- /.col -->
-                {{-- <div class="col-md-4 col-sm-6 col-12">
-                <div class="info-box">
-                    <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
+                <div class="col-md-4 col-sm-6 col-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-danger">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                        </span>
 
-                    <div class="info-box-content">
-                        <span class="info-box-text">Likes</span>
-                        <span class="info-box-number">93,139</span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Customer</span>
+                            <span class="info-box-number">{{$customer}}</span>
+                        </div>
+
                     </div>
-                    
+
                 </div>
-               
-            </div> --}}
+                <div class="col-md-4 col-sm-6 col-12">
+                    <a href="{{ route('admin.payments.index') }}">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-primary">
+                            <i class='fas fa-dollar-sign'></i>
+                        </span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Payments</span>
+                            <span class="info-box-number">{{$payment}}</span>
+                        </div>
+
+                    </div>
+                    </a>
+
+                </div>
                 <!-- /.col -->
             </div>
         </div>

@@ -20,13 +20,25 @@
         </section>
 
         <div class="row">
+            <div class=" text-center col-lg-10">
+                @if ($message = Session::get('success'))
+                    <div id="success-alert" class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+
+                    <script>
+                        setTimeout(function() {
+                            $('#success-alert').fadeOut('slow');
+                        }, 4000); // 4 seconds in milliseconds
+                    </script>
+                @endif
+            </div>
             <div class="card-body">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Payment Table</h3>
-                        <div class="text-right">
-                            <a href="{{ route('admin.payments.create') }}" class="btn btn-warning btn-sm"> Make Payment</a>
-                        </div>
+                        <h3 class="card-title">Payment History Table</h3>
+
                     </div>
                     <!-- /.card-header -->
                     <section class="content">
@@ -37,9 +49,9 @@
                                         <div class="card-header">
                                             <h3 class="card-title">
                                                 <a href="{{ route('admin.payments.show', '1') }}" id="show-deposit-button"
-                                                    class="btn btn-outline-info">Deposit</a>
+                                                    class="btn btn-outline-success">Deposit</a>
                                                 <a href="{{ route('admin.payments.show', '2') }}" id="show-withdraw-button"
-                                                    class="btn btn-outline-primary">Withdraw</a>
+                                                    class="btn btn-outline-danger">Withdraw</a>
                                             </h3>
                                         </div>
                                         <!-- /.card-header -->
@@ -54,30 +66,29 @@
                                                         <th>INR Amt</th>
                                                         <th>User ID</th>
                                                         <th>Remark</th>
-                                                        <th>DEP Type</th>
+                                                        <th>Payment Type</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
-                                                    @foreach ($payments as $payments)
+                                                    @foreach ($payments as $payment)
                                                         <tr>
-                                                            dd[]
                                                             <td>{{ $loop->index + 1 }}</td>
-                                                            <td>{{ $payments->customer->name }}</td>
-                                                            <td>{{ $payments->mtn_no }}</td>
-                                                            <td>{{ $payments->USD_amt }}</td>
-                                                            <td>{{ $payments->INR_amt }}</td>
-                                                            <td>{{ $payments->user_id }}</td>
-                                                            <td>{{ $payments->deposite_type }}</td>
-                                                            <td>{{ $payments->remark }}</td>
-                                                            <td>{{ $payments->stauts }}</td>
+                                                            <td>{{ $payment->customer->name }}</td>
+                                                            <td>{{ $payment->mtn_no }}</td>
+                                                            <td>{{ $payment->USD_amt }}</td>
+                                                            <td>{{ $payment->INR_amt }}</td>
+                                                            <td>{{ $payment->user_id }}</td>
+                                                            <td>{{ $payment->remark }}</td>
+                                                            <td>{{ $payment->deposit_type }}</td>
+                                                            <td>{{ $payment->status }}</td>
                                                             <td>
-                                                                <a href="{{ route('admin.payments.edit', $branches->id) }}"
+                                                                <a href="{{ route('admin.payments.edit', $payment->id) }}"
                                                                     class="btn btn-primary btn-sm">Edit</a>
                                                                 <form method="post" class="d-inline"
-                                                                    action="{{ route('admin.payments.destroy', $branches->id) }}">
+                                                                    action="{{ route('admin.payments.destroy', $payment->id) }}">
                                                                     @csrf
                                                                     @method('delete')
                                                                     <button type="submit"
@@ -85,7 +96,6 @@
                                                                         data-toggle="tooltip">Delete</button>
                                                                 </form>
                                                             </td>
-
                                                         </tr>
                                                     @endforeach
 

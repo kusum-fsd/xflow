@@ -37,4 +37,4 @@ Route::group(
     }
 );
 Auth::routes();
-Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
+

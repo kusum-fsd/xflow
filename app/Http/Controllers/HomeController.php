@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Customer;
 use App\Models\User;
 use App\Models\Branch;
+use App\Models\Payment;
 
 class HomeController extends Controller
 {
@@ -28,20 +29,11 @@ class HomeController extends Controller
     public function index()
     {
         $customer = Customer::count();
+        $payment = Payment::count();
         $user = User::whereNotIn('email', ['superadmin@gmail.com'])->count();
         $branch = Branch::count();
         $country = Country::count();
 
-        return view('home', compact('customer', 'user', 'branch', 'country'));
-    }
-    public function country()
-    {
-        return view('level');
-    }
-
-    public function logout()
-    {
-        auth()->logout();
-        return redirect()->route('home')->with('success', 'Your have been successfully logout');
+        return view('home', compact('customer', 'user', 'branch', 'country', 'payment'));
     }
 }

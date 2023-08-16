@@ -46,7 +46,7 @@
                                     <input class="form-control  @error('mobile_no') is-invalid @enderror" min="10"
                                         maxlength="10" size="10" type="text" id="mobile_no" name="mobile_no"
                                         oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
-                                        placeholder="Enter Mobile No." value="{{ old('mobile_no') }}">
+                                        placeholder="Enter Mobile No." value="{{ old('mobile_no', $user->mobile_no) }}">
                                     @error('mobile_no')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror

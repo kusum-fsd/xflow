@@ -36,8 +36,8 @@
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         <label>Title</label>
-                                        <input type="text" class="form-control " name="title" placeholder="Enter Title"
-                                            value="{{ old('title') }}">
+                                        <input type="text" class="form-control @error('title')is-invalid @enderror"
+                                            name="title" placeholder="Enter Title" value="{{ old('title') }}">
                                         @error('title')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
