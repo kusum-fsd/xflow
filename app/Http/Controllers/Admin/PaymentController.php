@@ -20,7 +20,8 @@ class PaymentController extends Controller
     {
         $user = auth()->user();
         $payments = $user->payments;
-        return view('admin.payments.index', compact('payments'));
+        $depositTypeLabels = config('PaymentHelper.deposit_types');
+        return view('admin.payments.index', compact('payments', 'depositTypeLabels'));
     }
 
     /**
@@ -93,8 +94,22 @@ class PaymentController extends Controller
     public function show($id)
     {
         $customers = Customer::all();
+        // $payments = Payment::findorFail(decrypt($id));
         return view('admin.payments.create', compact('customers', 'id'));
     }
+    public function showPaymentDetails($paymentId)
+    {
+        $payments = Payment::findOrFail($paymentId);
+
+        $depositTypeLabels = [
+            1 => 'Cash',
+            2 => 'Check',
+            3 => 'Bank',
+        ];
+
+        return view('admin.payments.show', compact('payments', 'depositTypeLabels'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.

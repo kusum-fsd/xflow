@@ -60,42 +60,43 @@
                                                 <thead class="bg-info">
                                                     <tr>
                                                         <th>S. NO.</th>
-                                                        <th>Customer ID</th>
+                                                        <th>Customer Name</th>
                                                         <th>MTN No</th>
                                                         <th>USD Amt</th>
                                                         <th>INR Amt</th>
-                                                        <th>User ID</th>
+                                                        <th>User Name</th>
                                                         <th>Remark</th>
                                                         <th>Payment Type</th>
-                                                        <th>Status</th>
+                                                        {{-- <th>Status</th> --}}
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
                                                     @foreach ($payments as $payment)
-                                                        <tr>
-                                                            <td>{{ $loop->index + 1 }}</td>
-                                                            <td>{{ $payment->customer->name }}</td>
-                                                            <td>{{ $payment->mtn_no }}</td>
-                                                            <td>{{ $payment->USD_amt }}</td>
-                                                            <td>{{ $payment->INR_amt }}</td>
-                                                            <td>{{ $payment->user_id }}</td>
-                                                            <td>{{ $payment->remark }}</td>
-                                                            <td>{{ $payment->deposit_type }}</td>
-                                                            <td>{{ $payment->status }}</td>
-                                                            <td>
-                                                                <a href="{{ route('admin.payments.edit', $payment->id) }}"
-                                                                    class="btn btn-primary btn-sm">Edit</a>
-                                                                <form method="post" class="d-inline"
-                                                                    action="{{ route('admin.payments.destroy', $payment->id) }}">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <button type="submit"
-                                                                        class="btn btn-danger btn-sm show_confirm"
-                                                                        data-toggle="tooltip">Delete</button>
-                                                                </form>
-                                                            </td>
+                                                        <td>{{ $loop->index + 1 }}</td>
+                                                        <td>{{ $payment->customer->name }}</td>
+                                                        <td>{{ $payment->mtn_no }}</td>
+                                                        <td class="{{ $payment->status == 1 ? 'green-text' : 'red-text' }}">
+                                                            {{ $payment->USD_amt }}</td>
+                                                        <td class="{{ $payment->status == 2 ? 'red-text' : 'green-text' }}">
+                                                            {{ $payment->INR_amt }}</td>
+                                                        <td>{{ $payment->user->name }}</td>
+                                                        <td>{{ $payment->remark }}</td>
+                                                        <td>{{ $depositTypeLabels[$payment->deposit_type] }}</td>
+                                                       
+                                                        <td>
+                                                            <a href="{{ route('admin.payments.edit', $payment->id) }}"
+                                                                class="btn btn-primary btn-sm">Edit</a>
+                                                            <form method="post" class="d-inline"
+                                                                action="{{ route('admin.payments.destroy', $payment->id) }}">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button type="submit"
+                                                                    class="btn btn-danger btn-sm show_confirm"
+                                                                    data-toggle="tooltip">Delete</button>
+                                                            </form>
+                                                        </td>
                                                         </tr>
                                                     @endforeach
 

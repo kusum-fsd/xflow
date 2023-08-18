@@ -58,10 +58,23 @@
     }
 
     .nav-sidebar .nav-item>.nav-link {
-        border: 1px solid #0661ab;
-        margin-bottom: 7px;
-        border-radius: 13px;
+        border: 2px solid #0661ab;
+        margin-bottom: 10px;
+        border-top: 1px solid #dee2e61a;
+        border-radius: 25px;
         box-shadow: 3px 3px 2px 1px #000000;
 
+    }
+
+    .green-text {
+        color: green;
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+    .red-text {
+        color: red;
+        font-size: 1.2rem;
+        font-weight: 800;
     }
 </style>

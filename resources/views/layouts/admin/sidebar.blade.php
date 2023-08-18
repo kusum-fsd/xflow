@@ -1,17 +1,18 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-        <img src="{{ asset('admin/dist/img/logo.svg') }}" alt="Company Logo" style="opacity: 1; width: 203px;">
+        <img src="{{ asset('admin/dist/img/logo.svg') }}" alt="Company Logo" style="opacity: 1; width: 170px;">
         {{-- <span class="brand-text font-weight-light">XFlow </span> --}}
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="user-panel mt-2 pb-2 mb-1 d-flex">
 
-            <div class="info">
-                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+            <div class="info" style="display: inline-flex">
+                <img src="{{ asset('admin/dist/img/on.gif') }}" style="opacity: 1;"> <a href="#"
+                    class="d-block">{{ Auth::user()->name }}</a>
             </div>
         </div>
 
@@ -60,7 +61,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('admin.customers.index')}}" class="nav-link">
+                    <a href="{{ route('admin.customers.index') }}" class="nav-link">
                         <i class="fa fa-users" aria-hidden="true"></i>
                         <p>
                             Customer
@@ -75,7 +76,7 @@
                         </p>
                     </a>
                 </li>
-               
+
 
                 {{-- <li class="nav-item">
                     <a href="#" class="nav-link">
